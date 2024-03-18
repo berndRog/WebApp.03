@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.Json;
+using WebApp.DomainModel;
 using WebApp.DomainModel.Model;
 namespace WebApp.Persistence;
 
@@ -14,7 +15,7 @@ public class DataContextFake : IDataContext {
       + "/WebApp03.json";
    
    // In-Memory Repository
-   public Dictionary<Guid, Book> Books { get; } = new();
+   public Dictionary<Guid, Book> Books { get; }
    
    public DataContextFake() {
       if (!File.Exists(_filePath)) {

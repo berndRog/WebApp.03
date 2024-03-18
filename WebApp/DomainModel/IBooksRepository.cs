@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using WebApp.DomainModel;
 using WebApp.DomainModel.Model;
-namespace WebApp;
+namespace WebApp.DomainModel;
 
 public interface IBooksRepository {
    IEnumerable<Book> Select();

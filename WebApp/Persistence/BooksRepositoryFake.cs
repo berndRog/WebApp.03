@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
+using WebApp.DomainModel;
 using WebApp.DomainModel.Model;
 namespace WebApp.Persistence;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.DomainModel;
 using WebApp.DomainModel.Model;
 using WebApp.Persistence;
 using WebApp.Views;

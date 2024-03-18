@@ -18,42 +18,28 @@ public class StaticFilesController(
 ) : Controller {
    
    // Static Files Endpoint Handler
-   private string GetStaticFiles(string page) {
+   private IResult GetStaticFiles(string page) {
       string filePath = Path.Combine(environment.WebRootPath, page);
-      if (System.IO.File.Exists(filePath)) {
-         return System.IO.File.ReadAllText(filePath);
-      }
-      else {
-         throw new Exception("File not found.");
-      }
-      
+      if (!System.IO.File.Exists(filePath)) return Results.NotFound($"{page} not found");
+      // files under wwwroot should be read-only
+      // FileInfo fileInfo = new(filePath);
+      // if (!fileInfo.IsReadOnly) return Results.BadRequest($"{page} is not read-only");
+      var html = System.IO.File.ReadAllText(filePath);
+      return Results.Content(html, "text/html");
    }
+
    
    // GET   /   or   /index
    [HttpGet("")]
    [HttpGet("index")]
-   public IResult GetIndex() {
-      // find data
-      string html = GetStaticFiles("index.html");
-      // return HTML view as HTTP response
-      return Results.Content(html, "text/html");
-   }
+   public IResult GetIndex() => GetStaticFiles("index.html");
 
    // GET   /page1
    [HttpGet("page1")]
-   public IResult GetPage1() {
-      // find data
-      string html = GetStaticFiles("page1.html");
-      // return HTML view as HTTP response
-      return Results.Content(html, "text/html");
-   }
+   public IResult GetPage1() => GetStaticFiles("page1.html");
   
    // GET   /page2
    [HttpGet("page2")]
-   public IResult GetPage2() {
-      // find data
-      string html = GetStaticFiles("page2.html");
-      // return HTML view as HTTP response
-      return Results.Content(html, "text/html");
-   }
+   public IResult GetPage2() =>  GetStaticFiles("page2.html");
+
 }

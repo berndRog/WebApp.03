@@ -65,6 +65,7 @@ public class BooksController : Controller {
       if (_repository.FindById(book.Id) != null)
          return Results.BadRequest("Posting the book fails: book already exists.");
       _repository.Add(book);
+      _dataContext.SaveAllChanges();
       // return HTTP response
       return Results.Created($"/books/{book.Id}", book);
    }
@@ -79,7 +80,7 @@ public class BooksController : Controller {
          return Results.BadRequest("Deleting the book fails: book does not exist.");
       var book = _repository.FindById(id);
        _repository.Delete(book!);
-
+       _dataContext.SaveAllChanges();
       // return HTTP response (=View)
       return Results.NoContent();
    }
